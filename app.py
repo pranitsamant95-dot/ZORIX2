@@ -233,7 +233,7 @@ feature_cols = [c for c in df.columns
                 and c != "Regime_Engine"]
 regime_cols = [c for c in feature_cols if c.startswith("Regime_")]
 
-clean = df.dropna(subset=feature_cols + [target_col]).copy()
+clean = df.dropna(subset=feature_cols + [target_col, fwd_col]).copy()
 
 if len(clean) < 200:
     st.warning(
