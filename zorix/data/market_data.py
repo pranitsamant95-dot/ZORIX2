@@ -68,7 +68,7 @@ class YahooFinanceProvider(MarketDataProvider):
             ) from exc
 
         try:
-            session = curl_requests.Session(impersonate="chrome146")
+            session = curl_requests.Session(impersonate="chrome")
             df = yf.download(symbol, start=start, end=end, auto_adjust=True, progress=False, session=session)
         except Exception as exc:  # network errors, rate limits, etc.
             raise DataUnavailableError(f"yfinance download failed for {symbol}: {exc}") from exc
