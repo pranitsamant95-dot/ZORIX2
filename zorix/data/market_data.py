@@ -61,13 +61,15 @@ class YahooFinanceProvider(MarketDataProvider):
     def fetch_ohlcv(self, symbol: str, start: str, end: str) -> pd.DataFrame:
         try:
             import yfinance as yf
+            from curl_cffi import requests as curl_requests
         except ImportError as exc:
             raise DataUnavailableError(
                 "yfinance is not installed. Run: pip install yfinance"
             ) from exc
 
         try:
-            df = yf.download(symbol, start=start, end=end, auto_adjust=True, progress=False)
+            session = curl_requests.Session(impersonate="chrome146")
+            df = yf.download(symbol, start=start, end=end, auto_adjust=True, progress=False, session=session)
         except Exception as exc:  # network errors, rate limits, etc.
             raise DataUnavailableError(f"yfinance download failed for {symbol}: {exc}") from exc
 
