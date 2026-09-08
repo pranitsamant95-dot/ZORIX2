@@ -9,5 +9,3 @@ xgboost>=2.0
 lightgbm>=4.0
 hmmlearn>=0.3
 vaderSentiment>=3.3
-tensorflow>=2.15
-shap>=0.45
